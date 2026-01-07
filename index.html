@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Барбершоп "Бороду не брей"</title>
+    
+    <!-- Подключаем Tailwind CSS для стилей -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Подключаем шрифты Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Иконки FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Настройка конфигурации Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#1a1a1a',
+                            gray: '#2d2d2d',
+                            gold: '#d4af37',
+                            goldHover: '#b5952f',
+                            white: '#f5f5f5'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Дополнительные стили */
+        body {
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        /* Анимация появления */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden">
+
+    <!-- Навигация -->
+    <nav class="fixed w-full z-50 bg-brand-dark/95 backdrop-blur-sm border-b border-brand-gray transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Логотип -->
+                <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-cut text-brand-gold text-2xl"></i>
+                        <span class="font-serif font-bold text-xl tracking-wider text-white">БОРОДУ НЕ БРЕЙ</span>
+                    </div>
+                </div>
+                
+                <!-- Меню для ПК -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about" class="hover:text-brand-gold transition-colors duration-300 px-3 py-2 text-sm font-medium uppercase tracking-wide">О нас</a>
+                        <a href="#services" class="hover:text-brand-gold transition-colors duration-300 px-3 py-2 text-sm font-medium uppercase tracking-wide">Услуги</a>
+                        <a href="#gallery" class="hover:text-brand-gold transition-colors duration-300 px-3 py-2 text-sm font-medium uppercase tracking-wide">Галерея</a>
+                        <a href="#contact" class="hover:text-brand-gold transition-colors duration-300 px-3 py-2 text-sm font-medium uppercase tracking-wide">Контакты</a>
+                        <button onclick="openModal()" class="bg-brand-gold hover:bg-brand-goldHover text-black px-5 py-2 rounded-sm font-bold uppercase text-xs tracking-wider transition-all transform hover:scale-105">
+                            Записаться
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Кнопка мобильного меню -->
+                <div class="-mr-2 flex md:hidden">
+                    <button onclick="toggleMobileMenu()" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-brand-gray focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Мобильное меню -->
+        <div class="md:hidden hidden bg-brand-dark border-b border-brand-gray" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <a href="#about" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-gold block px-3 py-2 text-base font-medium">О нас</a>
+                <a href="#services" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-gold block px-3 py-2 text-base font-medium">Услуги</a>
+                <a href="#gallery" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-gold block px-3 py-2 text-base font-medium">Галерея</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-gold block px-3 py-2 text-base font-medium">Контакты</a>
+                <button onclick="openModal(); toggleMobileMenu()" class="w-full mt-4 bg-brand-gold text-black px-5 py-3 font-bold uppercase">
+                    Записаться
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Главный экран (Hero) -->
+    <header class="relative h-screen flex items-center justify-center hero-bg text-center px-4">
+        <div class="max-w-4xl mx-auto fade-in-up">
+            <p class="text-brand-gold font-medium tracking-[0.2em] mb-4 text-sm md:text-base uppercase">Мужской клуб & Барбершоп</p>
+            <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight text-shadow">
+                Твой стиль — <br/> Твоя визитная карточка
+            </h1>
+            <p class="text-gray-300 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light">
+                Мы не просто стрижем волосы. Мы ухаживаем за бородой и создаем образы для настоящих мужчин.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="openModal()" class="bg-brand-gold hover:bg-brand-goldHover text-black px-8 py-4 font-bold uppercase tracking-wider transition-all transform hover:-translate-y-1">
+                    Записаться онлайн
+                </button>
+                <a href="#services" class="border border-white hover:bg-white hover:text-black text-white px-8 py-4 font-bold uppercase tracking-wider transition-all">
+                    Смотреть цены
+                </a>
+            </div>
+        </div>
+        
+        <!-- Скролл вниз -->
+        <div class="absolute bottom-10 w-full text-center animate-bounce">
+            <a href="#about" class="text-white opacity-50 hover:opacity-100 transition-opacity">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- О нас -->
+    <section id="about" class="py-20 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-brand-gold hidden lg:block"></div>
+                    <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Интерьер барбершопа" class="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500 shadow-2xl rounded-sm">
+                    <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-brand-gold hidden lg:block"></div>
+                </div>
+                <div>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-6">Философия <span class="text-brand-gold">"Бороду не брей"</span></h2>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Название нашего барбершопа — это не приказ, а напоминание. Борода — это символ мужественности, который требует уважения и правильного ухода. Мы верим, что стрижка должна подчеркивать характер, а бритье быть ритуалом, а не рутиной.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 mt-8">
+                        <div class="flex items-center gap-4">
+                            <i class="fas fa-certificate text-brand-gold text-3xl"></i>
+                            <div>
+                                <h4 class="font-bold text-white">Топ мастера</h4>
+                                <p class="text-xs text-gray-500">Профи со стажем</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <i class="fas fa-glass-whiskey text-brand-gold text-3xl"></i>
+                            <div>
+                                <h4 class="font-bold text-white">Атмосфера</h4>
+                                <p class="text-xs text-gray-500">Кофе и напитки</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Услуги и цены -->
+    <section id="services" class="py-20 bg-brand-gray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-gold font-medium tracking-widest uppercase text-sm">Прайс-лист</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mt-2">Наши Услуги</h2>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Услуга 1 -->
+                <div class="bg-brand-dark p-8 border border-gray-800 hover:border-brand-gold transition-colors duration-300 group">
+                    <div class="flex justify-between items-baseline mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-brand-gold transition-colors">Мужская стрижка</h3>
+                        <span class="text-brand-gold font-bold text-lg">1200 ₽</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-6">Подбор стиля, мытье головы, укладка стайлингом.</p>
+                    <button onclick="openModal('Мужская стрижка')" class="text-white text-xs uppercase tracking-wider font-bold hover:text-brand-gold flex items-center gap-2">
+                        Записаться <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Услуга 2 -->
+                <div class="bg-brand-dark p-8 border border-gray-800 hover:border-brand-gold transition-colors duration-300 group">
+                    <div class="flex justify-between items-baseline mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-brand-gold transition-colors">Стрижка бороды</h3>
+                        <span class="text-brand-gold font-bold text-lg">800 ₽</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-6">Оформление контуров, коррекция длины, горячее полотенце.</p>
+                    <button onclick="openModal('Стрижка бороды')" class="text-white text-xs uppercase tracking-wider font-bold hover:text-brand-gold flex items-center gap-2">
+                        Записаться <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Услуга 3 -->
+                <div class="bg-brand-dark p-8 border border-gray-800 hover:border-brand-gold transition-colors duration-300 group">
+                    <div class="flex justify-between items-baseline mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-brand-gold transition-colors">Комплекс "Папа + Сын"</h3>
+                        <span class="text-brand-gold font-bold text-lg">2000 ₽</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-6">Стрижка для взрослого и ребенка до 12 лет.</p>
+                    <button onclick="openModal('Комплекс Папа+Сын')" class="text-white text-xs uppercase tracking-wider font-bold hover:text-brand-gold flex items-center gap-2">
+                        Записаться <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Услуга 4 -->
+                <div class="bg-brand-dark p-8 border border-gray-800 hover:border-brand-gold transition-colors duration-300 group">
+                    <div class="flex justify-between items-baseline mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-brand-gold transition-colors">Королевское бритье</h3>
+                        <span class="text-brand-gold font-bold text-lg">1500 ₽</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-6">Бритье опасной бритвой, распаривание, уход за кожей.</p>
+                    <button onclick="openModal('Королевское бритье')" class="text-white text-xs uppercase tracking-wider font-bold hover:text-brand-gold flex items-center gap-2">
+                        Записаться <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Услуга 5 -->
+                <div class="bg-brand-dark p-8 border border-gray-800 hover:border-brand-gold transition-colors duration-300 group">
+                    <div class="flex justify-between items-baseline mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-brand-gold transition-colors">Камуфляж седины</h3>
+                        <span class="text-brand-gold font-bold text-lg">1000 ₽</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-6">Тонирование головы или бороды для скрытия седины.</p>
+                    <button onclick="openModal('Камуфляж седины')" class="text-white text-xs uppercase tracking-wider font-bold hover:text-brand-gold flex items-center gap-2">
+                        Записаться <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Услуга 6 -->
+                <div class="bg-brand-dark p-8 border border-brand-gold transition-colors duration-300 group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-brand-gold text-black text-xs font-bold px-2 py-1">ХИТ</div>
+                    <div class="flex justify-between items-baseline mb-4">
+                        <h3 class="text-xl font-bold text-white group-hover:text-brand-gold transition-colors">Стрижка + Борода</h3>
+                        <span class="text-brand-gold font-bold text-lg">1800 ₽</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-6">Полный комплекс услуг по выгодной цене.</p>
+                    <button onclick="openModal('Стрижка + Борода')" class="text-brand-gold text-xs uppercase tracking-wider font-bold hover:text-white flex items-center gap-2">
+                        Записаться <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Галерея -->
+    <section id="gallery" class="py-20 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-gold font-medium tracking-widest uppercase text-sm">Портфолио</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mt-2">Наши Работы</h2>
+                <div class="w-20 h-1 bg-brand-gold mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="overflow-hidden rounded-sm h-64">
+                    <img src="https://images.unsplash.com/photo-1593702295094-aea8c5c13d73?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Work 1" class="w-full h-full object-cover transform hover:scale-110 transition-duration-500 grayscale hover:grayscale-0">
+                </div>
+                <div class="overflow-hidden rounded-sm h-64">
+                    <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Work 2" class="w-full h-full object-cover transform hover:scale-110 transition-duration-500 grayscale hover:grayscale-0">
+                </div>
+                <div class="overflow-hidden rounded-sm h-64">
+                    <img src="https://images.unsplash.com/photo-1622287162716-f311baa31296?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Work 3" class="w-full h-full object-cover transform hover:scale-110 transition-duration-500 grayscale hover:grayscale-0">
+                </div>
+                <div class="overflow-hidden rounded-sm h-64">
+                    <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Work 4" class="w-full h-full object-cover transform hover:scale-110 transition-duration-500 grayscale hover:grayscale-0">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция записи (промо) -->
+    <section class="py-20 bg-brand-gray relative">
+        <div class="absolute inset-0 bg-black/50 z-0">
+            <img src="https://images.unsplash.com/photo-1504198458649-3128b932f49e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover opacity-20" alt="Background">
+        </div>
+        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+            <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mb-6">Готов изменить свой стиль?</h2>
+            <p class="text-gray-300 mb-8 text-lg">Запишись сейчас и получи скидку 10% на первое посещение по промокоду "БОРОДА"</p>
+            <button onclick="openModal()" class="bg-brand-gold hover:bg-brand-goldHover text-black px-10 py-4 font-bold uppercase tracking-wider text-lg rounded-sm shadow-lg transform hover:-translate-y-1 transition-all">
+                Записаться к мастеру
+            </button>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer id="contact" class="bg-black text-white pt-16 pb-8 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <!-- Контакты -->
+                <div>
+                    <h3 class="font-serif text-2xl font-bold mb-6 flex items-center gap-2">
+                        <i class="fas fa-cut text-brand-gold text-lg"></i> Бороду не брей
+                    </h3>
+                    <p class="text-gray-400 mb-4">Настоящее место для мужского отдыха и качественного сервиса.</p>
+                    <div class="space-y-3">
+                        <p class="flex items-center gap-3 text-gray-300">
+                            <i class="fas fa-map-marker-alt text-brand-gold"></i>
+                            г. Москва, ул. Примерная, д. 10
+                        </p>
+                        <p class="flex items-center gap-3 text-gray-300">
+                            <i class="fas fa-phone-alt text-brand-gold"></i>
+                            <a href="tel:+79991234567" class="hover:text-brand-gold transition">+7 (999) 123-45-67</a>
+                        </p>
+                        <p class="flex items-center gap-3 text-gray-300">
+                            <i class="fas fa-clock text-brand-gold"></i>
+                            Ежедневно: 10:00 - 22:00
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Карта (заглушка) -->
+                <div class="bg-gray-800 h-64 rounded-sm flex items-center justify-center relative overflow-hidden group">
+                    <!-- Здесь мог бы быть iframe Яндекс.Карт или Google Maps -->
+                    <div class="absolute inset-0 opacity-50 bg-[url('https://maps.googleapis.com/maps/api/staticmap?center=Moscow&zoom=12&size=400x300&sensor=false')] bg-cover bg-center"></div>
+                    <a href="https://yandex.ru/maps" target="_blank" class="relative z-10 bg-brand-gold text-black px-4 py-2 text-sm font-bold uppercase hover:bg-white transition-colors">
+                        Открыть карту
+                    </a>
+                </div>
+
+                <!-- Соцсети -->
+                <div class="flex flex-col items-start md:items-end">
+                    <h4 class="font-bold text-lg mb-6 uppercase tracking-wider">Мы в соцсетях</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-brand-gold hover:text-black transition-all transform hover:scale-110">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-brand-gold hover:text-black transition-all transform hover:scale-110">
+                            <i class="fab fa-telegram-plane text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-brand-gold hover:text-black transition-all transform hover:scale-110">
+                            <i class="fab fa-vk text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+                <p>&copy; 2023 Барбершоп "Бороду не брей". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно записи -->
+    <div id="bookingModal" class="fixed inset-0 z-[100] hidden">
+        <!-- Фон -->
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        
+        <!-- Окно -->
+        <div class="relative min-h-screen md:min-h-0 flex items-center justify-center p-4">
+            <div class="bg-brand-gray w-full max-w-md rounded-sm shadow-2xl border border-gray-700 p-8 relative animate-[fadeIn_0.3s_ease-out]">
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                
+                <h3 class="font-serif text-2xl font-bold text-white mb-2 text-center">Запись на стрижку</h3>
+                <p class="text-gray-400 text-center text-sm mb-6">Оставьте заявку, и мы перезвоним через 5 минут</p>
+                
+                <form onsubmit="submitForm(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-400 text-xs uppercase mb-1">Ваше имя</label>
+                        <input type="text" required class="w-full bg-brand-dark border border-gray-600 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors" placeholder="Иван">
+                    </div>
+                    <div>
+                        <label class="block text-gray-400 text-xs uppercase mb-1">Телефон</label>
+                        <input type="tel" required class="w-full bg-brand-dark border border-gray-600 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors" placeholder="+7 (999) 000-00-00">
+                    </div>
+                    <div>
+                        <label class="block text-gray-400 text-xs uppercase mb-1">Услуга</label>
+                        <select id="serviceSelect" class="w-full bg-brand-dark border border-gray-600 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-gold transition-colors">
+                            <option>Мужская стрижка</option>
+                            <option>Стрижка бороды</option>
+                            <option>Комплекс "Папа + Сын"</option>
+                            <option>Королевское бритье</option>
+                            <option>Стрижка + Борода</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-brand-gold hover:bg-brand-goldHover text-black font-bold uppercase py-4 mt-2 transition-colors">
+                        Подтвердить запись
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script>
+        // Мобильное меню
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Модальное окно
+        function openModal(serviceName = null) {
+            const modal = document.getElementById('bookingModal');
+            const select = document.getElementById('serviceSelect');
+            
+            if (serviceName) {
+                select.value = serviceName;
+            }
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Блокируем скролл фона
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('bookingModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Возвращаем скролл
+        }
+
+        // Имитация отправки формы
+        function submitForm(event) {
+            event.preventDefault();
+            const btn = event.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            
+            btn.innerText = "ОТПРАВЛЕНО!";
+            btn.classList.add('bg-green-600', 'text-white');
+            btn.classList.remove('bg-brand-gold', 'text-black');
+            
+            setTimeout(() => {
+                closeModal();
+                // Сброс кнопки через время
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('bg-green-600', 'text-white');
+                    btn.classList.add('bg-brand-gold', 'text-black');
+                    event.target.reset();
+                }, 500);
+            }, 1500);
+        }
+
+        // Эффект на навигацию при скролле
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+                nav.classList.replace('bg-brand-dark/95', 'bg-brand-dark/100');
+            } else {
+                nav.classList.remove('shadow-lg');
+                nav.classList.replace('bg-brand-dark/100', 'bg-brand-dark/95');
+            }
+        });
+    </script>
+</body>
+</html>
