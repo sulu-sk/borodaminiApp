@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Барбершоп "Бороду не брей"</title>
+    <title>BORODA Club — территория мужского стиля</title>
     
     <!-- Подключаем Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -85,7 +85,7 @@
                 <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-cut text-brand-gold text-2xl"></i>
-                        <span class="font-serif font-bold text-lg md:text-xl tracking-wider text-white">БОРОДУ НЕ БРЕЙ</span>
+                        <span class="font-serif font-bold text-lg md:text-xl tracking-wider text-white">BORODA CLUB</span>
                     </div>
                 </div>
                 <div class="hidden md:block">
@@ -122,12 +122,12 @@
 
     <header class="relative h-screen flex items-center justify-center hero-bg text-center px-4">
         <div class="max-w-4xl mx-auto fade-in-up">
-            <p class="text-brand-gold font-medium tracking-[0.2em] mb-4 text-xs md:text-base uppercase">Мужской клуб & Барбершоп</p>
+            <p class="text-brand-gold font-medium tracking-[0.2em] mb-4 text-xs md:text-base uppercase">Территория мужского стиля</p>
             <h1 class="font-serif text-3xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight text-shadow">
-                Твой стиль — <br/> Твоя визитная карточка
+                BORODA CLUB
             </h1>
             <p class="text-gray-300 text-base md:text-xl mb-10 max-w-2xl mx-auto font-light">
-                Мы не просто стрижем волосы. Мы создаем образы для настоящих мужчин.
+                Запись на стрижку в один клик.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
                 <button onclick="openModal()" class="w-full sm:w-auto bg-brand-gold hover:bg-brand-goldHover text-black px-8 py-4 font-bold uppercase tracking-wider transition-all transform hover:-translate-y-1">
@@ -150,9 +150,9 @@
                     <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Интерьер" class="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500 shadow-2xl rounded-sm">
                 </div>
                 <div>
-                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-6">Философия <span class="text-brand-gold">"Бороду не брей"</span></h2>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-6">Философия <span class="text-brand-gold">BORODA Club</span></h2>
                     <p class="text-gray-400 mb-6 leading-relaxed">
-                        Стрижка должна подчеркивать характер. Мы делаем это профессионально.
+                        Мы верим, что стрижка должна подчеркивать характер. BORODA Club — это не просто барбершоп, это клуб для тех, кто ценит качество и стиль.
                     </p>
                 </div>
             </div>
@@ -218,7 +218,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                 <div>
-                    <h3 class="font-serif text-2xl font-bold mb-6 flex items-center gap-2"><i class="fas fa-cut text-brand-gold text-lg"></i> Бороду не брей</h3>
+                    <h3 class="font-serif text-2xl font-bold mb-6 flex items-center gap-2"><i class="fas fa-cut text-brand-gold text-lg"></i> BORODA CLUB</h3>
                     <div class="space-y-3">
                         <p class="flex items-center gap-3 text-gray-300"><i class="fas fa-map-marker-alt text-brand-gold"></i> г. Москва, ул. Примерная, д. 10</p>
                         <p class="flex items-center gap-3 text-gray-300"><i class="fas fa-phone-alt text-brand-gold"></i> +7 (999) 123-45-67</p>
@@ -226,7 +226,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-                <p>&copy; 2023 Барбершоп "Бороду не брей".</p>
+                <p>&copy; 2026 BORODA Club. Все права защищены.</p>
             </div>
         </div>
     </footer>
@@ -305,7 +305,7 @@
             const service = document.getElementById('serviceSelect').value;
 
             // Текст сообщения для администратора
-            const message = `💈 *Новая запись!*\n\n👤 Имя: ${name}\n📱 Телефон: ${phone}\n✂️ Услуга: ${service}`;
+            const message = `💈 *Новая запись в BORODA Club!*\n\n Имя: ${name}\n Телефон: ${phone}\n Услуга: ${service}`;
 
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
             btn.disabled = true;
